@@ -6,39 +6,25 @@
 static IPLib ip_lib;
 
 static PyObject* load_dict_function(PyObject *self, PyObject *args) {
-    PyObject* dict_path = NULL;
-    if (!PyArg_ParseTuple(args, "O", &dict_path)) {
+    const char* dict_path = NULL;
+    if (!PyArg_ParseTuple(args, "s", &dict_path)) {
         return NULL;
     }
 
-    if (!PyString_Check(dict_path)) {
-        PyErr_SetString(PyExc_TypeError,
-                        "The dict path must be a string");
-        return NULL;
-    }
-
-    char* _dict_path = PyString_AsString(dict_path);
-    ip_lib.LoadDict(_dict_path);
+    ip_lib.LoadDict(dict_path);
 
     Py_INCREF(Py_True);
     return Py_True;
 }
 
 static PyObject* get_country_function(PyObject *self, PyObject *args) {
-    PyObject* ip = NULL;
-    if (!PyArg_ParseTuple(args, "O", &ip)) {
-        return NULL;
-    }
-
-    if (!PyString_Check(ip)) {
-        PyErr_SetString(PyExc_TypeError,
-                        "The ip must be a string");
+    const char* ip = NULL;
+    if (!PyArg_ParseTuple(args, "s", &ip)) {
         return NULL;
     }
 
     std::string country;
-    const char* _ip = PyString_AsString(ip);
-    ip_lib.GetCountry(_ip, country);
+    ip_lib.GetCountry(ip, country);
 
     if (country.empty()) {
         Py_INCREF(Py_None);
