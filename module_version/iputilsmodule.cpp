@@ -33,8 +33,7 @@ static PyObject* get_country_function(PyObject *self, PyObject *args) {
     if (!PyString_Check(ip)) {
         PyErr_SetString(PyExc_TypeError,
                         "The ip must be a string");
-        Py_INCREF(Py_False);
-        return Py_False;
+        return NULL;
     }
 
     std::string country;
