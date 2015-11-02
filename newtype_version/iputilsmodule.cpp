@@ -109,7 +109,7 @@ static PyMethodDef IP2Location_methods[] = {
 static PyTypeObject IP2LocationType = {
     PyObject_HEAD_INIT(NULL)
     0,                                        /*ob_size*/
-    "_iputils.IP2Location",                     /*tp_name*/
+    "_iputils.IP2Location",                   /*tp_name*/
     sizeof(IP2Location),                      /*tp_basicsize*/
     0,                                        /*tp_itemsize*/
     (destructor)IP2Location_dealloc,          /*tp_dealloc*/
