@@ -1,3 +1,6 @@
+#!/bin/env python
+# encoding: utf-8
+
 import _iputils
 
 ip = _iputils.IP2Location("../dict/czip.txt")
