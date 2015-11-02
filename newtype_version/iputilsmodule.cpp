@@ -1,7 +1,9 @@
 #include "Python.h"
 #include "structmember.h"
 
+#include <fcntl.h>
 #include <string>
+
 #include "../ip_table.h"
 
 typedef struct {
@@ -31,6 +33,13 @@ IP2Location_init(IP2Location* self, PyObject* args, PyObject* kwds) {
     static char* kwlist[] = {"dict_path", "callback", NULL};
 
     if (!PyArg_ParseTupleAndKeywords(args, kwds, "s|O", kwlist, &dict_path, &callback)) {
+        return -1;
+    }
+
+    // dict path not exist
+    if (access(dict_path, F_OK) != 0) {
+        PyErr_SetString(PyExc_ValueError,
+                        "The dict_path must exist");
         return -1;
     }
 

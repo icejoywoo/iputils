@@ -21,3 +21,8 @@ try:
 except TypeError:
     print "ok"
 
+
+try:
+    _iputils.load_dict("dict/czip.txt")
+except ValueError:
+    print "file not exist: ok"

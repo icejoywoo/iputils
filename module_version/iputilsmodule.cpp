@@ -1,6 +1,8 @@
 #include "Python.h"
 
+#include <fcntl.h>
 #include <string>
+
 #include "../ip_table.h"
 
 static IPLib ip_lib;
@@ -8,6 +10,12 @@ static IPLib ip_lib;
 static PyObject* load_dict_function(PyObject *self, PyObject *args) {
     const char* dict_path = NULL;
     if (!PyArg_ParseTuple(args, "s", &dict_path)) {
+        return NULL;
+    }
+
+    if (access(dict_path, F_OK) != 0) {
+        PyErr_SetString(PyExc_ValueError,
+                        "The dict_path must exist");
         return NULL;
     }
 

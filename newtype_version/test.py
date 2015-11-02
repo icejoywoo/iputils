@@ -3,6 +3,11 @@
 
 import _iputils
 
+try:
+    ip = _iputils.IP2Location("dict/czip.txt")
+except ValueError:
+    print "file not exist: ok"
+
 ip = _iputils.IP2Location("../dict/czip.txt")
 print ip.get_country("180.214.232.50")
 
