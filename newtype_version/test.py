@@ -11,7 +11,6 @@ except ValueError:
 ip = _iputils.IP2Location("../dict/czip.txt")
 print ip.get_country("180.214.232.50")
 
-
 def parse(line):
     fields = line.split()
     return tuple(fields[:3])
