@@ -17,11 +17,11 @@ try:
     import _iputils
     timeit_wrapper('c ext load dict', '_iputils.IP2Location("dict/czip.txt")', 'import _iputils', number=10)
     timeit_wrapper('c ext load dict with user-defined parse', '_iputils.IP2Location("dict/cz88ip.txt", parse)', '''
-    import _iputils
+import _iputils
 
-    def parse(line):
-        fields = line.split()
-        return tuple(fields[:3])
+def parse(line):
+    fields = line.split()
+    return tuple(fields[:3])
     ''', number=10)
 except ImportError:
     pass
@@ -41,13 +41,13 @@ try:
     import _iputils
     timeit_wrapper('c ext query', 'ip.get_country("180.214.232.50")', 'import _iputils; ip = _iputils.IP2Location("dict/czip.txt")')
     timeit_wrapper('c ext query(load dict with user-defined parse)', 'ip.get_country("180.214.232.50")', '''
-    import _iputils
+import _iputils
 
-    def parse(line):
-        fields = line.split()
-        return tuple(fields[:3])
+def parse(line):
+    fields = line.split()
+    return tuple(fields[:3])
 
-    ip = _iputils.IP2Location("dict/cz88ip.txt", parse)
+ip = _iputils.IP2Location("dict/cz88ip.txt", parse)
     ''')
 except ImportError:
     pass
