@@ -2,6 +2,9 @@
  * @author: wujiabin
  */
 
+#ifndef _IP_TABLE_H_
+#define _IP_TABLE_H_
+
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
@@ -22,22 +25,18 @@ typedef std::vector<IPItem> IPTable;
 /**
  * 把字符串按指定分隔符进行切分
  */
-static void split_string(const std::string& string_list, std::vector< std::string >& result, const char delimiter = ',') {
+static void split_string(const std::string& string_list, std::vector< std::string >& result, const char delimiter) {
     const char* start = string_list.c_str();
     const char* p;
-    for(p = start; *p; ++p)
-    {
-        if(*p == delimiter)
-        {
-            if(p != start)
-            {
+    for (p = start; *p; ++p) {
+        if (*p == delimiter) {
+            if (p != start) {
                 result.push_back(std::string(start, p - start));
             }
             start = ++p;
         }
     }
-    if(p != start)
-    {
+    if (p != start) {
         result.push_back(std::string(start, p - start));
     }
 }
@@ -48,7 +47,7 @@ static void split_string(const std::string& string_list, std::vector< std::strin
 static uint64_t ip2int(const std::string& ip) {
     std::vector<std::string> result;
     split_string(ip, result, '.');
-    if (result.size() == 4 ) {
+    if (result.size() == 4) {
         uint64_t a = atoi(result[0].c_str());
         uint64_t b = atoi(result[1].c_str());
         uint64_t c = atoi(result[2].c_str());
@@ -120,3 +119,5 @@ class IPLib {
     private:
         IPTable m_ip_table;
 };
+
+#endif
